@@ -7,8 +7,8 @@ namespace DesignPattern.Strategy.ComOPadrao
     {        
         public void Enviar(List<Mensagem> mensagens)
         {
-            // tudo que é necessario para enviar um sms
-            Console.WriteLine("Sms enviado");
+            // tudo que é necessario para enviar um push
+            Console.WriteLine("Push enviado");
         }
     }
 }
