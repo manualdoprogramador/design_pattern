@@ -13,7 +13,7 @@ namespace DesignPattern
             mensagens.Add(new Mensagem("teste@teste.com", "Obrigado por se cadastrar"));
             mensagens.Add(new Mensagem("teste2@teste.com", "Obrigado por se cadastrar"));
             mensagens.Add(new Mensagem("teste3@teste.com", "Obrigado por se cadastrar"));
-            var enviaMensagem = new EnviaMensagem();
+            var enviaMensagem = new EnviaMensagemComOPadrao();
             enviaMensagem.Enviar(mensagens, "email");            
         }
     }
