@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DesignPattern.Decorator;
 using DesignPattern.State;
 using DesignPattern.Strategy;
 using DesignPattern.Strategy.ComOPadrao;
@@ -10,17 +11,10 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            var pedido = new Pedido("Tenis",500);
-            try
-            {
-                pedido.Aprovado();
-                pedido.Reprovado();
-                pedido.Finalizado();
-            }              
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            var produto = new Produto("Tenis",500);
+            var imposto = new ICB(new ICC());
+            var valorDoImposto = imposto.Calcular(produto);
+            Console.WriteLine($"O valor do imposto é: {valorDoImposto}");
         }
     }
 }
