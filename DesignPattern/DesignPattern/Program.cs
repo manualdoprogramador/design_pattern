@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DesignPattern.Builder;
 using DesignPattern.Decorator;
 using DesignPattern.State;
 using DesignPattern.Strategy;
@@ -11,10 +12,18 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            var produto = new Produto("Tenis",500);
-            var imposto = new ICB(new ICC());
-            var valorDoImposto = imposto.Calcular(produto);
-            Console.WriteLine($"O valor do imposto é: {valorDoImposto}");
+            var pessoa = new PessoaBuilder()
+                         .SetNome("Gustavo")
+                         .SetApelido("Gustavo")
+                         .SetCpf("123456789-64")
+                         .SetDataNascimento(Convert.ToDateTime("1993-01-01"))
+                         .SetEmail("teste@teste.com")
+                         .Construir();
+
+            Console.WriteLine(pessoa.Nome);
+            Console.WriteLine(pessoa.Cpf);
+            Console.WriteLine(pessoa.DataNascimento);
+            Console.WriteLine(pessoa.Email);
         }
     }
 }
