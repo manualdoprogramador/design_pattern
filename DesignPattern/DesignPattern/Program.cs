@@ -5,6 +5,9 @@ using DesignPattern.Decorator;
 using DesignPattern.State;
 using DesignPattern.Strategy;
 using DesignPattern.Strategy.ComOPadrao;
+using System.Data;
+using System.Data.SqlClient;
+using DesignPattern.Factory;
 
 namespace DesignPattern
 {
@@ -12,21 +15,17 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            var pessoa = new PessoaBuilder()
-                         .SetNome("Gustavo")
-                         .SetApelido("Gustavo")
-                         .SetCpf("123456789-64")
-                         .SetDataNascimento(Convert.ToDateTime("1993-01-01"))
-                         .SetEmail("teste@teste.com")
-                         .SetAcaoAposCadastrarPessoa(new EnviaEmail())
-                         .SetAcaoAposCadastrarPessoa(new EnviaSms())
-                         .Construir();
+            // forma sem o Padrão 
+            IDbConnection conexao = new SqlConnection();
+            conexao.ConnectionString = "User Id=root;Password=;Server=localhost;Database=banco";
+            conexao.Open();
 
-            Console.WriteLine(pessoa.Nome);
-            Console.WriteLine(pessoa.Cpf);
-            Console.WriteLine(pessoa.DataNascimento);
-            Console.WriteLine(pessoa.Email);
-            pessoa.Salvar();
+            // aqui iriamos fazer as interações
+
+            // Com padrão 
+            var conexao1 = new ConnectionFactory().GetConnection();
+
+            
         }
     }
 }
