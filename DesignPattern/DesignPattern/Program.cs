@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using DesignPattern.Observer;
-using DesignPattern.State;
 using DesignPattern.Strategy;
 using DesignPattern.Strategy.ComOPadrao;
 using System.Data;
 using System.Data.SqlClient;
 using DesignPattern.Factory;
 using DesignPattern.Memento;
+using DesignPattern.Command;
 
 namespace DesignPattern
 {
@@ -15,27 +15,16 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {      
-            HistoricoDoProduto historicoDoProduto = new HistoricoDoProduto();     
-            var produto = new Produto("Gustavo", 10);            
-            historicoDoProduto.Adicionar(produto);
-            
-            produto.EditarPreco(20);
-            historicoDoProduto.Adicionar(produto);
-            
-            produto.EditarPreco(50);
-            historicoDoProduto.Adicionar(produto);
-            
-            produto.EditarPreco(10);
-            historicoDoProduto.Adicionar(produto);
-            
-            produto.EditarPreco(60);            
-            historicoDoProduto.Adicionar(produto);
-            
-            var index = 2;
-            Console.WriteLine(historicoDoProduto.Buscar(index).Nome);
-            Console.WriteLine(historicoDoProduto.Buscar(index).Preco);
-            Console.WriteLine(historicoDoProduto.Buscar(index).DataAlteracao);
-            
+            Pedido pedido1 = new Pedido("Mauricio", 150.0);
+            Pedido pedido2 = new Pedido("Marcelo", 250.0);
+
+            FilaDeProcessamento fila = new FilaDeProcessamento();
+
+            fila.Adicionar(new PagaPedido(pedido1));
+            fila.Adicionar(new PagaPedido(pedido2));
+            fila.Adicionar(new FinalizaPedido(pedido1));
+
+            fila.Processar();            
         }
     }
 }
